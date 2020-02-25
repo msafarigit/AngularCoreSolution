@@ -1,0 +1,82 @@
+<div class="k-rtl">
+  <kendo-toolbar [overflow]="true">
+  <kendo-toolbar-buttongroup>
+      <kendo-toolbar-button
+          [icon]="'undo'"
+          (click)="onItemClick('Undo button clicked')"
+      >
+      </kendo-toolbar-button>
+      <kendo-toolbar-button
+          [icon]="'redo'"
+          (click)="onItemClick('Redo button clicked')"
+      >
+      </kendo-toolbar-button>
+  </kendo-toolbar-buttongroup>
+  <kendo-toolbar-separator></kendo-toolbar-separator>
+  <kendo-toolbar-buttongroup>
+      <kendo-toolbar-button
+          [toggleable]="'true'"
+          [icon]="'bold'"
+          (click)="onItemClick('Bold button clicked')"
+      >
+      </kendo-toolbar-button>
+      <kendo-toolbar-button
+          [toggleable]="'true'"
+          [icon]="'italic'"
+          (click)="onItemClick('Italic button clicked')"
+      >
+      </kendo-toolbar-button>
+      <kendo-toolbar-button
+          [toggleable]="'true'"
+          [icon]="'underline'"
+          (click)="onItemClick('Underline button clicked')"
+      >
+      </kendo-toolbar-button>
+  </kendo-toolbar-buttongroup>
+  <kendo-toolbar-separator></kendo-toolbar-separator>
+  <kendo-toolbar-buttongroup [selection]="'single'">
+      <kendo-toolbar-button
+          [toggleable]="true"
+          [icon]="'align-left'"
+          [text]="'Left'"
+          (click)="onItemClick('Align left button clicked')"
+      >
+      </kendo-toolbar-button>
+      <kendo-toolbar-button
+          [toggleable]="true"
+          [icon]="'align-center'"
+          [text]="'Center'"
+          (click)="onItemClick('Align centere button clicked')"
+      >
+      </kendo-toolbar-button>
+      <kendo-toolbar-button
+          [toggleable]="true"
+          [icon]="'align-right'"
+          [text]="'Right'"
+          (click)="onItemClick('Align right button clicked')"
+      >
+      </kendo-toolbar-button>
+      <kendo-toolbar-button
+          [toggleable]="true"
+          [icon]="'align-justify'"
+          [text]="'Justify'"
+          (click)="onItemClick('Align justify button clicked')"
+      >
+      </kendo-toolbar-button>
+  </kendo-toolbar-buttongroup>
+  <kendo-toolbar-separator></kendo-toolbar-separator>
+  <kendo-toolbar-splitbutton
+      [icon]="'paste'"
+      [text]="'Paste'"
+      [data]="splitButtonData"
+      (buttonClick)="onItemClick('Paste splitbutton clicked')"
+  >
+  </kendo-toolbar-splitbutton>
+  <kendo-toolbar-dropdownbutton
+      [icon]="'cog'"
+      [text]="'Set default paste'"
+      [data]="dropdownButtonData"
+  >
+  </kendo-toolbar-dropdownbutton>
+</kendo-toolbar>
+</div>

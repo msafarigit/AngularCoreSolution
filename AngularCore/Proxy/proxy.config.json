@@ -1,0 +1,32 @@
+// Proxy Configuration (proxy.config.json)
+{
+  // Allowed referrers must contain an exact URL match use "*" to match any referrer.
+  "allowedReferrers": [ "*" ],
+  // Set use app pool identity to use the same network credentials as the app process running in IIS
+  "useAppPoolIdentity": false,
+  // Token cache time given in minutes. Should be = or < timeout returned in tokens.
+  "tokenCacheMinutes": 29,
+  // Array of root URLS to be proxied
+  "serverUrls": [
+    // Example using IWA to authenticate with the server
+    //{
+    //  "url": "http://edsabsama:6080/arcgis/rest/",
+    //  "domain": "",
+    //  "username": "agsadmin",
+    //  "password": "ags123@456"
+
+    //}//,
+    // Example using using client and client secret to get OAuth tokens.
+    // Note: IWA credentials can also be passed for environments where IT has the token endpoint behind IWA.
+    {
+      "url": "http://192.168.0.129:6080/arcgis/rest/",
+      "domain": "",
+      "username": "agsadmin",
+      "password": "ags123@456",
+      "clientId": "EdsabArcgisId",
+      "clientSecret": "EdsabArcgisSecret",
+      //http://192.168.0.129:6080/arcgis/tokens/generateToken?password=brol112&f=json&username=smsec&encrypted=false
+      "oauth2Endpoint": "http://192.168.0.129:6080/arcgis/"
+    }
+  ]
+}
