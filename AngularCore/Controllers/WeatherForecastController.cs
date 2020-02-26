@@ -7,6 +7,10 @@ using Microsoft.Extensions.Logging;
 
 namespace AngularCore.Controllers
 {
+    /*
+     Don't create a web API controller by deriving from the Controller class.
+     Controller derives from ControllerBase and adds support for views, so it's for handling web pages, not web API requests.
+    */
     [ApiController]
     [Route("[controller]")]
     public class WeatherForecastController : ControllerBase
@@ -26,14 +30,15 @@ namespace AngularCore.Controllers
         [HttpGet]
         public IEnumerable<WeatherForecast> Get()
         {
-            var rng = new Random();
-            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
-            {
-                Date = DateTime.Now.AddDays(index),
-                TemperatureC = rng.Next(-20, 55),
-                Summary = Summaries[rng.Next(Summaries.Length)]
-            })
-            .ToArray();
+            Random rng = new Random();
+            return Enumerable.Range(1, 5)
+                             .Select(index => new WeatherForecast
+                             {
+                                 Date = DateTime.Now.AddDays(index),
+                                 TemperatureC = rng.Next(-20, 55),
+                                 Summary = Summaries[rng.Next(Summaries.Length)]
+                             })
+                             .ToArray();
         }
     }
 }

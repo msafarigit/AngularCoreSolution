@@ -2,7 +2,7 @@
 using System.Net;
 using System.Collections.Generic;
 
-namespace Ags.ResourceProxy
+namespace Infrastructure
 {
 	public interface IProxyConfigService
 	{

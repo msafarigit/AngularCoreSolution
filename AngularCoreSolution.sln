@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorApp", "BlazorApp\Blaz
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RazorApp", "RazorTest\RazorApp.csproj", "{411AC0EE-9FA3-4AA5-86F2-96F0090977B5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ags.ResourceProxy", "Ags.ResourceProxy\Ags.ResourceProxy.csproj", "{3F1CC87F-795F-4E44-AE7A-180C7D4FCF91}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastucture", "Ags.ResourceProxy\Infrastucture.csproj", "{3F1CC87F-795F-4E44-AE7A-180C7D4FCF91}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

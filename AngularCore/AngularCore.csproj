@@ -48,7 +48,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Ags.ResourceProxy\Ags.ResourceProxy.csproj" />
+    <ProjectReference Include="..\Ags.ResourceProxy\Infrastucture.csproj" />
   </ItemGroup>
 
   <ItemGroup>

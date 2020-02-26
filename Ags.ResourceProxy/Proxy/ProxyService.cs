@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Primitives;
 
-namespace Ags.ResourceProxy
+namespace Infrastructure
 {
     public class ProxyService : IProxyService
     {

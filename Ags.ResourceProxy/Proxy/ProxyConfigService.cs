@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Hosting;
 using Newtonsoft.Json.Linq;
 using Microsoft.Extensions.Hosting;
 
-namespace Ags.ResourceProxy
+namespace Infrastructure
 {
 	public class ProxyConfigService : IProxyConfigService
 	{

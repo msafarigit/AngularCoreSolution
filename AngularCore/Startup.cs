@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using System.Net.Http;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -9,8 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Caching.Memory;
-using Ags.ResourceProxy;
-using System.Net.Http;
+using Infrastructure;
 
 namespace AngularCore
 {
@@ -29,8 +29,9 @@ namespace AngularCore
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            // services.AddRouting();
 
-            ////esri arcgis server proxy
+            //esri arcgis server proxy
             services.AddSingleton<IProxyConfigService, ProxyConfigService>(serviceProvider => new ProxyConfigService(serviceProvider.GetService<IWebHostEnvironment>(), "/Proxy/proxy.config.json"));
             services.AddSingleton<IProxyService, ProxyService>();
 
