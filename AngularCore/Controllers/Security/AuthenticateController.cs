@@ -8,9 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace AngularCore.Controllers.Security
 {
-    [ApiController]
-    [Route("api/[controller]/[action]")]
-    public class AuthenticateController : ControllerBase
+    public class AuthenticateController : ApiControllerBase
     {
         [HttpGet]
         public IActionResult LogOut()
@@ -19,14 +17,10 @@ namespace AngularCore.Controllers.Security
         }
     }
 
-    //[ApiController]
-    //[Route("api/[controller]/[action]")]
-    //public class ApiControllerBase : ControllerBase
-    //{
-    //    [HttpGet]
-    //    public IActionResult LogOut()
-    //    {
-    //        return Ok(new { status = StatusCodes.Status200OK, body = new { result = "test" } });
-    //    }
-    //}
+    [ApiController]
+    [Route("api/[controller]/[action]")]
+    public class ApiControllerBase : ControllerBase
+    {
+    }
+
 }
