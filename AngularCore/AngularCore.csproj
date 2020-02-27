@@ -30,20 +30,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="ClientApp\dist\3rdpartylicenses.txt" />
-    <None Remove="ClientApp\dist\fontawesome-webfont.674f50d287a8c48dc19b.eot" />
-    <None Remove="ClientApp\dist\fontawesome-webfont.912ec66d7572ff821749.svg" />
-    <None Remove="ClientApp\dist\fontawesome-webfont.af7ae505a9eed503f8b8.woff2" />
-    <None Remove="ClientApp\dist\fontawesome-webfont.b06871f281fee6b241d6.ttf" />
-    <None Remove="ClientApp\dist\fontawesome-webfont.fee66e712a8a08eef580.woff" />
-    <None Remove="ClientApp\dist\index.html" />
-    <None Remove="ClientApp\dist\main-es2015.8e06c8676872609fec72.js" />
-    <None Remove="ClientApp\dist\main-es5.8e06c8676872609fec72.js" />
-    <None Remove="ClientApp\dist\polyfills-es2015.2987770fde9daa1d8a2e.js" />
-    <None Remove="ClientApp\dist\polyfills-es5.df1101cc1e7b588877f8.js" />
-    <None Remove="ClientApp\dist\runtime-es2015.edb2fcf2778e7bf1d426.js" />
-    <None Remove="ClientApp\dist\runtime-es5.edb2fcf2778e7bf1d426.js" />
-    <None Remove="ClientApp\dist\styles.995d18845b3d2496643c.css" />
     <None Remove="ClientApp\src\app\app.config.ts" />
   </ItemGroup>
 

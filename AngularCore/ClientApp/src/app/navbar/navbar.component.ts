@@ -1,4 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
+import { HttpClient, HttpResponse } from '@angular/common/http';
+
 import { APP_CONFIG, AppConfig } from 'app/app.config';
 
 @Component({
@@ -15,15 +17,20 @@ export class NavbarComponent implements OnInit {
   title: string;
   version: string;
 
-  constructor(@Inject(APP_CONFIG) private config: AppConfig) { }
+  constructor(private http: HttpClient, @Inject(APP_CONFIG) private config: AppConfig) { }
 
   ngOnInit() {
     this.title = this.config.title;
     this.version = this.config.version;
   }
 
-  signout(): void {
-    this.navbarCollapsed = true;
-    // '~/Authentication/LogOut'
+  async signout(): Promise<void> {
+    try {
+      this.navbarCollapsed = true;
+      const url = `${this.config.apiEndpoint}Authenticate/LogOut`;
+      const promise = await this.http.get<HttpResponse<{}>>(url).toPromise();
+    } catch (e) {
+      console.log('error', e);
+    }
   }
 }

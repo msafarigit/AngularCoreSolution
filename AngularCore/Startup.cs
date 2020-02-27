@@ -86,9 +86,7 @@ namespace AngularCore
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller}/{action=Index}/{id?}");
+                endpoints.MapControllerRoute(name: "default", pattern: "api/{controller=Authenticate}/{action=Index}/{id?}");
             });
 
             /*

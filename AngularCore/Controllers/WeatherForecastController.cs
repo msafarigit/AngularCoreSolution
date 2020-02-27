@@ -12,7 +12,7 @@ namespace AngularCore.Controllers
      Controller derives from ControllerBase and adds support for views, so it's for handling web pages, not web API requests.
     */
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class WeatherForecastController : ControllerBase
     {
         private static readonly string[] Summaries = new[]
