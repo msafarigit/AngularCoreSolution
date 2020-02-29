@@ -10,7 +10,7 @@ export class FetchDataComponent {
   public forecasts: WeatherForecast[];
 
   constructor(http: HttpClient, @Inject(APP_CONFIG) private config: AppConfig) {
-    http.get<WeatherForecast[]>(this.config.apiEndpoint + 'weatherforecast').subscribe(result => {
+    http.get<WeatherForecast[]>(this.config.apiEndpoint + 'WeatherForecast').subscribe(result => {
       this.forecasts = result;
     }, error => console.error(error));
   }

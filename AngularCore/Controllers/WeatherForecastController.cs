@@ -7,13 +7,7 @@ using Microsoft.Extensions.Logging;
 
 namespace AngularCore.Controllers
 {
-    /*
-     Don't create a web API controller by deriving from the Controller class.
-     Controller derives from ControllerBase and adds support for views, so it's for handling web pages, not web API requests.
-    */
-    [ApiController]
-    [Route("api/[controller]")]
-    public class WeatherForecastController : ControllerBase
+    public class WeatherForecastController : ApiControllerBase
     {
         private static readonly string[] Summaries = new[]
         {

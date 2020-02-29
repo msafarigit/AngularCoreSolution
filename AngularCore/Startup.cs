@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Caching.Memory;
+using Microsoft.AspNetCore.Routing.Constraints;
 using Infrastructure;
 
 namespace AngularCore
@@ -86,7 +87,12 @@ namespace AngularCore
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllerRoute(name: "default", pattern: "api/{controller=Authenticate}/{action=Index}/{id?}");
+                endpoints.MapControllerRoute("DefaultWithActionApi", "api/{controller=Authenticate}/{action=Index}/{id?}");
+                endpoints.MapControllerRoute("DefaultDeleteApi", "api/{controller}/{id}", new { action = "Delete" }, new { id = @"\d+", httpMethod = new HttpMethodRouteConstraint(HttpMethod.Delete.ToString()) });
+                endpoints.MapControllerRoute("DefaultGetByIdApi", "api/{controller}/{id}", new { action = "GetByID" }, new { id = @"\d+", httpMethod = new HttpMethodRouteConstraint(HttpMethod.Get.ToString()) });
+                endpoints.MapControllerRoute("DefaultGetApi", "api/{controller}", new { action = "Get" }, new { httpMethod = new HttpMethodRouteConstraint(HttpMethod.Get.ToString()) });
+                endpoints.MapControllerRoute("DefaultPostApi", "api/{controller}", new { action = "Post" }, new { httpMethod = new HttpMethodRouteConstraint(HttpMethod.Post.ToString()) });
+                endpoints.MapControllerRoute("DefaultPutApi", "api/{controller}", new { action = "Put" }, new { httpMethod = new HttpMethodRouteConstraint(HttpMethod.Put.ToString()) });
             });
 
             /*

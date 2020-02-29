@@ -16,11 +16,4 @@ namespace AngularCore.Controllers.Security
             return Ok(new { status = StatusCodes.Status200OK , body = new { result = "test" } });
         }
     }
-
-    [ApiController]
-    [Route("api/[controller]/[action]")]
-    public class ApiControllerBase : ControllerBase
-    {
-    }
-
 }
