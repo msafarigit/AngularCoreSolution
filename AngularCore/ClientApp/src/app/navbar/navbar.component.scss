@@ -22,6 +22,7 @@
   display: none;
 }
 
-.navbar.navbar-dark .navbar-nav .dropdown > a.nav-link.dropdown-toggle:hover {
+.navbar a.nav-link:hover,
+.navbar a.dropdown-item:hover {
   cursor: pointer;
 }

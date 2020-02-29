@@ -25,6 +25,9 @@
           <a class="dropdown-item" routerLink="/fetch-data" (click)="navbarCollapsed = true">Fetch data</a>
           <a class="dropdown-item" routerLink="/baseInfo" (click)="navbarCollapsed = true">Product</a>
           <a class="dropdown-item" routerLink="/map" (click)="navbarCollapsed = true">Map</a>
+          <a class="dropdown-item" (click)="changePassword(content)">
+            <i class="fa fa-unlock-alt pl-2"></i>تغییر رمز عبور
+          </a>
           <a class="dropdown-item" (click)="signout()">
             <i class="fa fa-sign-out pl-2"></i>خروج
           </a>
@@ -41,3 +44,18 @@
     <img title="سایت شرکت ادصاب" src="/assets/image/edsab.png">
   </a>
 </nav>
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Modal title</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p>One fine body&hellip;</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+  </div>
+</ng-template>
