@@ -12,6 +12,11 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.AspNetCore.Routing.Constraints;
 using Infrastructure;
+using Microsoft.AspNetCore.Http.Features;
+using Microsoft.AspNetCore.Server.Kestrel.Core;
+using Microsoft.Extensions.Options;
+using Microsoft.AspNetCore.Localization;
+using System.Collections.Generic;
 
 namespace AngularCore
 {
@@ -29,8 +34,24 @@ namespace AngularCore
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // If using IIS:
+            services.Configure<IISServerOptions>(options =>
+            {
+                options.AllowSynchronousIO = true;
+                options.MaxRequestBodySize = 30_000_000_000_000;
+
+            });
+
+            services.Configure<FormOptions>(options =>
+            {
+                options.MultipartBodyLengthLimit = 3000_000_000;
+            });
+
             services.AddControllersWithViews();
             // services.AddRouting();
+
+            KestrelServerLimits kestrelServerLimits = new KestrelServerLimits();
+            kestrelServerLimits.MaxRequestBodySize = 330_000_000;
 
             //esri arcgis server proxy
             services.AddSingleton<IProxyConfigService, ProxyConfigService>(serviceProvider => new ProxyConfigService(serviceProvider.GetService<IWebHostEnvironment>(), "/Proxy/proxy.config.json"));
@@ -58,6 +79,26 @@ namespace AngularCore
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            #region Set Date Format
+            IOptions<RequestLocalizationOptions> options = app.ApplicationServices.GetService<IOptions<RequestLocalizationOptions>>();
+            IList<IRequestCultureProvider> requestCultureProviderList = options.Value.RequestCultureProviders;
+            CookieRequestCultureProvider cookieProvider = requestCultureProviderList.OfType<CookieRequestCultureProvider>().First();
+            QueryStringRequestCultureProvider urlProvider = requestCultureProviderList.OfType<QueryStringRequestCultureProvider>().First();
+
+            cookieProvider.Options.DefaultRequestCulture = new RequestCulture("en-US");
+            cookieProvider.Options.DefaultRequestCulture.Culture.DateTimeFormat.ShortDatePattern = "M/d/yyyy";
+
+            urlProvider.Options.DefaultRequestCulture = new RequestCulture("en-US");
+            urlProvider.Options.DefaultRequestCulture.Culture.DateTimeFormat.ShortDatePattern = "M/d/yyyy";
+
+            cookieProvider.CookieName = "UserCulture";
+
+            options.Value.RequestCultureProviders.Clear();
+            options.Value.RequestCultureProviders.Add(cookieProvider);
+            options.Value.RequestCultureProviders.Add(urlProvider);
+            app.UseRequestLocalization(options.Value);
+            #endregion
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage(); //Built-in middleware
