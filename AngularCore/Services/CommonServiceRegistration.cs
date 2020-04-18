@@ -1,11 +1,12 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 using Infrastructure.Setting;
 using Infrastructure.Security;
 using Infrastructure.Logging;
+using Access.Context;
 
 namespace AngularCore.Services
 {
@@ -33,7 +34,7 @@ namespace AngularCore.Services
             if (appSettings.LogContext == "1")
                 MyLoggerFactory.AddFile("Logs/AngularEF-{Date}.txt", appSettings.LogLevel);
 
-            services.AddDbContext<NabIncidentAnnouncementContext>(options =>
+            services.AddDbContext<DataContext>(options =>
                 options.UseOracle(connectionString, oracleOptions => oracleOptions.UseOracleSQLCompatibility("12"))
                        .UseLazyLoadingProxies()
                        .ConfigureWarnings(warning => warning.Default(WarningBehavior.Ignore).Log(CoreEventId.DetachedLazyLoadingWarning))

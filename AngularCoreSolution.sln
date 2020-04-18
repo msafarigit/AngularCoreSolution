@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common", "Common\Common.csp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastucture", "Infrastructure\Infrastucture.csproj", "{C6BA1540-EDA3-487C-9A60-FF0B74A8A399}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Access", "Access\Access.csproj", "{FB9A9BE3-9719-4929-BE0E-489912965F63}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{C6BA1540-EDA3-487C-9A60-FF0B74A8A399}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C6BA1540-EDA3-487C-9A60-FF0B74A8A399}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C6BA1540-EDA3-487C-9A60-FF0B74A8A399}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FB9A9BE3-9719-4929-BE0E-489912965F63}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB9A9BE3-9719-4929-BE0E-489912965F63}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FB9A9BE3-9719-4929-BE0E-489912965F63}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FB9A9BE3-9719-4929-BE0E-489912965F63}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

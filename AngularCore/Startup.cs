@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using System.Net.Http;
+using System.Collections.Generic;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -11,12 +12,12 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.AspNetCore.Routing.Constraints;
-using Infrastructure;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.Extensions.Options;
 using Microsoft.AspNetCore.Localization;
-using System.Collections.Generic;
+using Infrastructure;
+using AngularCore.Services;
 
 namespace AngularCore
 {
@@ -52,6 +53,8 @@ namespace AngularCore
 
             KestrelServerLimits kestrelServerLimits = new KestrelServerLimits();
             kestrelServerLimits.MaxRequestBodySize = 330_000_000;
+
+            services.RegisterCommonServices(Configuration);
 
             //esri arcgis server proxy
             services.AddSingleton<IProxyConfigService, ProxyConfigService>(serviceProvider => new ProxyConfigService(serviceProvider.GetService<IWebHostEnvironment>(), "/Proxy/proxy.config.json"));

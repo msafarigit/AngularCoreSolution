@@ -17,8 +17,13 @@ namespace AngularCore
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) => Host.CreateDefaultBuilder(args)
+                                                                           .ConfigureAppConfiguration((hostingContext, config) =>
+                                                                           {
+                                                                               config.AddJsonFile(@"./appsettings-angular.json", false, true);
+                                                                           })
                                                                            .ConfigureWebHostDefaults(webBuilder =>
                                                                            {
+                                                                               webBuilder.ConfigureKestrel(serverOptions => serverOptions.Limits.MaxRequestBodySize = 1000 * 1024);
                                                                                webBuilder.UseStartup<Startup>();
                                                                            });
     }
