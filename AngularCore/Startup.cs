@@ -48,6 +48,15 @@ namespace AngularCore
                 options.MultipartBodyLengthLimit = 3000_000_000;
             });
 
+            //services.AddControllers() //only webapi
+            //        .ConfigureApiBehaviorOptions(options =>
+            //        {
+            //            options.SuppressConsumesConstraintForFormFileParameters = true;
+            //            options.SuppressInferBindingSourcesForParameters = true;
+            //            options.SuppressModelStateInvalidFilter = true;
+            //            options.SuppressMapClientErrors = true;
+            //            options.ClientErrorMapping[404].Link = "https://httpstatuses.com/404";
+            //        });
             services.AddControllersWithViews();
             // services.AddRouting();
 
@@ -129,6 +138,10 @@ namespace AngularCore
                                                             app.ApplicationServices.GetService<IMemoryCache>())
             );
 
+            /*
+             The [ApiController] attribute makes attribute routing a requirement.
+             Actions are inaccessible via conventional routes defined by UseEndpoints, UseMvc, or UseMvcWithDefaultRoute in Startup.Configure.
+             */
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute("DefaultWithActionApi", "api/{controller=Authenticate}/{action=Index}/{id?}");
