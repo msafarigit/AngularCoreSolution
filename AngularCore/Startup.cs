@@ -120,7 +120,33 @@ namespace AngularCore
                 app.UseExceptionHandler("/Error");
             }
 
-            app.UseStaticFiles();
+            //The parameterless UseStaticFiles method overload marks the files in web root as servable.
+            //following markup references wwwroot/images/banner1.svg:
+            //<img src="~/images/banner1.svg" alt="ASP.NET" class="img-responsive" />
+            app.UseStaticFiles(); // For the wwwroot folder
+            /*
+             app.UseStaticFiles(new StaticFileOptions
+             {
+             FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "MyStaticFiles")),
+             RequestPath = "/StaticFiles"
+             });
+             <img src="~/StaticFiles/images/banner1.svg" alt="ASP.NET" class="img-responsive" />
+
+
+             Set HTTP response headers: A StaticFileOptions object can be used to set HTTP response headers. In addition to configuring static file serving from the web root, the following code sets the Cache-Control header:
+             var cachePeriod = env.IsDevelopment() ? "600" : "604800";
+             app.UseStaticFiles(new StaticFileOptions
+             {
+                 OnPrepareResponse = ctx =>
+                 {
+                    // Requires the following import:
+                    // using Microsoft.AspNetCore.Http;
+                    ctx.Context.Response.Headers.Append("Cache-Control", $"public, max-age={cachePeriod}");
+                 }
+             });
+             */
+
+
             if (!env.IsDevelopment())
             {
                 app.UseSpaStaticFiles();
