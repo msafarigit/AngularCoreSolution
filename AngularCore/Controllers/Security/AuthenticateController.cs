@@ -10,6 +10,10 @@ namespace AngularCore.Controllers.Security
 {
     public class AuthenticateController : ApiControllerBase
     {
+        //IActionResult type
+        //The IActionResult return type is appropriate when multiple ActionResult return types are possible in an action.
+        //The ActionResult types represent various HTTP status codes.
+        
         [HttpGet]
         public IActionResult LogOut()
         {
