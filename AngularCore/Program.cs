@@ -40,4 +40,33 @@ namespace AngularCore
                                                                                webBuilder.UseStartup<Startup>();
                                                                            });
     }
+
+    /* url: https://docs.microsoft.com/en-us/aspnet/core/fundamentals/host/generic-host?view=aspnetcore-3.1#default-builder-settings
+     The CreateDefaultBuilder method:
+      -Sets the content root to the path returned by GetCurrentDirectory.
+      -Loads host configuration from:
+          -Environment variables prefixed with DOTNET_.
+          -Command-line arguments.
+      -Loads app configuration from:
+          -appsettings.json.
+          -appsettings.{Environment}.json.
+          -Secret Manager when the app runs in the Development environment.
+          -Environment variables.
+          -Command-line arguments.
+      -Adds the following logging providers:
+          -Console
+          -Debug
+          -EventSource
+          -EventLog (only when running on Windows)
+      -Enables scope validation and dependency validation when the environment is Development.
+     */
+
+    /* url: https://docs.microsoft.com/en-us/aspnet/core/fundamentals/host/generic-host?view=aspnetcore-3.1#default-builder-settings
+     The ConfigureWebHostDefaults method:
+        Loads host configuration from environment variables prefixed with ASPNETCORE_.
+        Sets Kestrel server as the web server and configures it using the app's hosting configuration providers. For the Kestrel server's default options, see Kestrel web server implementation in ASP.NET Core.
+        Adds Host Filtering middleware.
+        Adds Forwarded Headers middleware if ASPNETCORE_FORWARDEDHEADERS_ENABLED equals true.
+        Enables IIS integration. For the IIS default options, see Host ASP.NET Core on Windows with IIS.
+     */
 }

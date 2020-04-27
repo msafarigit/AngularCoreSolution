@@ -7,15 +7,16 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
+using Microsoft.AspNetCore.Routing.Constraints;
+using Microsoft.AspNetCore.Http.Features;
+using Microsoft.AspNetCore.Server.Kestrel.Core;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Caching.Memory;
-using Microsoft.AspNetCore.Routing.Constraints;
-using Microsoft.AspNetCore.Http.Features;
-using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.Extensions.Options;
-using Microsoft.AspNetCore.Localization;
+using Microsoft.Net.Http.Headers;
 using Infrastructure;
 using AngularCore.Services;
 
@@ -48,6 +49,9 @@ namespace AngularCore
                 options.MultipartBodyLengthLimit = 3000_000_000;
             });
 
+            services.AddResponseCaching();
+            services.AddResponseCompression();
+
             //services.AddControllers() //only webapi
             //        .ConfigureApiBehaviorOptions(options =>
             //        {
@@ -64,7 +68,6 @@ namespace AngularCore
             kestrelServerLimits.MaxRequestBodySize = 330_000_000;
 
             services.RegisterCommonServices(Configuration);
-            services.AddResponseCompression();
 
             //esri arcgis server proxy
             services.AddSingleton<IProxyConfigService, ProxyConfigService>(serviceProvider => new ProxyConfigService(serviceProvider.GetService<IWebHostEnvironment>(), "/Proxy/proxy.config.json"));
@@ -158,14 +161,29 @@ namespace AngularCore
              });
              */
 
-            app.UseResponseCompression();
-
             if (!env.IsDevelopment())
             {
                 app.UseSpaStaticFiles();
             }
 
             app.UseRouting();
+
+            app.UseResponseCompression();
+            //Response Caching Middleware only caches server responses that result in a 200 (OK) status code. 
+            app.UseResponseCaching();
+            app.Use(async (context, next) =>
+            {
+                //Cache-Control – Caches cacheable responses for up to 10 seconds.
+                context.Response.GetTypedHeaders().CacheControl = new CacheControlHeaderValue()
+                {
+                    NoCache = true, 
+                    NoStore = true,
+                    MaxAge = TimeSpan.FromSeconds(10)
+                };
+                //Vary – Configures the middleware to serve a cached response only if the Accept-Encoding header of subsequent requests matches that of the original request.
+                context.Response.Headers[HeaderNames.Vary] = new string[] { "Accept-Encoding" };
+                await next();
+            });
 
             /*
              The primary difference between UseWhen and MapWhen is how later (i.e. registered below) middleware is executed.
