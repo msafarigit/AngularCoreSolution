@@ -36,6 +36,7 @@ namespace AngularCore
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddHostedService<LifetimeEventsHostedService>();
             // If using IIS:
             services.Configure<IISServerOptions>(options =>
             {
@@ -168,7 +169,18 @@ namespace AngularCore
 
             app.UseRouting();
 
+            /*url: https://docs.microsoft.com/en-us/aspnet/core/performance/response-compression?view=aspnetcore-3.1
+             Use Response Compression Middleware when you're:
+                1-Unable to use the following server-based compression technologies:
+                    IIS Dynamic Compression module
+                    Apache mod_deflate module
+                    Nginx Compression and Decompression
+                2-Hosting directly on:
+                    HTTP.sys server (formerly called WebListener)
+                    Kestrel server
+             */
             app.UseResponseCompression();
+
             //Response Caching Middleware only caches server responses that result in a 200 (OK) status code. 
             app.UseResponseCaching();
             app.Use(async (context, next) =>

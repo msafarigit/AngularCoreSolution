@@ -13,22 +13,40 @@ namespace AngularCore
     {
         public static void Main(string[] args)
         {
+            /*
+             Host definition:
+                A host is an object that encapsulates an app's resources, such as:
+                    -Dependency injection (DI)
+                    -Logging
+                    -Configuration
+                    -IHostedService implementations
+                When a host starts, it calls IHostedService.StartAsync on each implementation of IHostedService that it finds in the DI container.
+                In a web app, one of the IHostedService implementations is a web service that starts an HTTP server implementation.
+                The main reason for including all of the app's interdependent resources in one object is lifetime management: control over app startup and graceful shutdown.
+
+             The following Framework-provided services are registered automatically:
+                -IHostApplicationLifetime
+                -IHostLifetime
+                -IHostEnvironment / IWebHostEnvironment
+             */
             CreateHostBuilder(args).Build().Run();
         }
 
-        //Serve static files
-        //Static files are stored within the project's web root directory.
-        //The default directory is {content root}/wwwroot, but it can be changed via the UseWebRoot method. 
-        //See Content root and Web root for more information.
-        //The Host.CreateDefaultBuilder method sets the content root to the current directory
-        //  wwwroot
-        //      -css
-        //      -images
-        //      -js
-
-        //The URI format to access a file in the images subfolder is http://<server_address>/images/<image_file_name>. 
-        // For example, http://localhost:9189/images/banner3.svg.
-        //If targeting .NET Core, the Microsoft.AspNetCore.App metapackage includes this package.
+        /*
+         Serve static files
+         Static files are stored within the project's web root directory.
+         The default directory is {content root}/wwwroot, but it can be changed via the UseWebRoot method. 
+         See Content root and Web root for more information.
+         The Host.CreateDefaultBuilder method sets the content root to the current directory
+           wwwroot
+               -css
+               -images
+               -js
+         
+         The URI format to access a file in the images subfolder is http://<server_address>/images/<image_file_name>. 
+          For example, http://localhost:9189/images/banner3.svg.
+         If targeting .NET Core, the Microsoft.AspNetCore.App metapackage includes this package.
+        */
         public static IHostBuilder CreateHostBuilder(string[] args) => Host.CreateDefaultBuilder(args)
                                                                            .ConfigureAppConfiguration((hostingContext, config) =>
                                                                            {
@@ -37,6 +55,11 @@ namespace AngularCore
                                                                            .ConfigureWebHostDefaults(webBuilder =>
                                                                            {
                                                                                webBuilder.ConfigureKestrel(serverOptions => serverOptions.Limits.MaxRequestBodySize = 1000 * 1024);
+                                                                               //When false, errors during startup result in the host exiting. When true, the host captures exceptions during startup and attempts to start the server.
+                                                                               webBuilder.CaptureStartupErrors(true);
+                                                                               //When enabled, or when the environment is Development, the app captures detailed errors.
+                                                                               webBuilder.UseSetting(WebHostDefaults.DetailedErrorsKey, "true");
+                                                                               //webBuilder.UseSetting("https_port", "8080");
                                                                                webBuilder.UseStartup<Startup>();
                                                                            });
     }
