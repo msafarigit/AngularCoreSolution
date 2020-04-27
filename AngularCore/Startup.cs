@@ -64,6 +64,7 @@ namespace AngularCore
             kestrelServerLimits.MaxRequestBodySize = 330_000_000;
 
             services.RegisterCommonServices(Configuration);
+            services.AddResponseCompression();
 
             //esri arcgis server proxy
             services.AddSingleton<IProxyConfigService, ProxyConfigService>(serviceProvider => new ProxyConfigService(serviceProvider.GetService<IWebHostEnvironment>(), "/Proxy/proxy.config.json"));
@@ -124,28 +125,40 @@ namespace AngularCore
             //following markup references wwwroot/images/banner1.svg:
             //<img src="~/images/banner1.svg" alt="ASP.NET" class="img-responsive" />
             app.UseStaticFiles(); // For the wwwroot folder
+
             /*
-             app.UseStaticFiles(new StaticFileOptions
-             {
-             FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "MyStaticFiles")),
-             RequestPath = "/StaticFiles"
+             // Set up custom content types - associating file extension to MIME type
+             var provider = new FileExtensionContentTypeProvider();
+             // Add new mappings
+             provider.Mappings[".myapp"] = "application/x-msdownload";
+             provider.Mappings[".htm3"] = "text/html";
+             provider.Mappings[".image"] = "image/png";
+             // Replace an existing mapping
+             provider.Mappings[".rtf"] = "application/x-msdownload";
+             // Remove MP4 videos.
+             provider.Mappings.Remove(".mp4");
+
+             app.UseStaticFiles(new StaticFileOptions {
+                FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "MyStaticFiles")),
+                RequestPath = "/StaticFiles",
+                ContentTypeProvider = provider
              });
              <img src="~/StaticFiles/images/banner1.svg" alt="ASP.NET" class="img-responsive" />
-
-
-             Set HTTP response headers: A StaticFileOptions object can be used to set HTTP response headers. In addition to configuring static file serving from the web root, the following code sets the Cache-Control header:
-             var cachePeriod = env.IsDevelopment() ? "600" : "604800";
+             
+             //Set HTTP response headers: A StaticFileOptions object can be used to set HTTP response headers.
+             //In addition to configuring static file serving from the web root, the following code sets the Cache-Control header:
+             string cachePeriod = env.IsDevelopment() ? "600" : "604800";
              app.UseStaticFiles(new StaticFileOptions
              {
-                 OnPrepareResponse = ctx =>
-                 {
-                    // Requires the following import:
-                    // using Microsoft.AspNetCore.Http;
+                OnPrepareResponse = ctx =>
+                {
+                    // Requires: using Microsoft.AspNetCore.Http;
                     ctx.Context.Response.Headers.Append("Cache-Control", $"public, max-age={cachePeriod}");
-                 }
+                }
              });
              */
 
+            app.UseResponseCompression();
 
             if (!env.IsDevelopment())
             {
