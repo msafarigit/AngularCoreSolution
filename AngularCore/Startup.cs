@@ -234,6 +234,15 @@ namespace AngularCore
                 spa.Options.SourcePath = "ClientApp";
                 spa.Options.StartupTimeout = TimeSpan.FromSeconds(1000);
 
+                /*see http://www.jiodev.com/aspnet/core/spa/angular
+                 spa.UseSpaPrerendering(options =>
+                 {
+                    options.BootModulePath = $"{spa.Options.SourcePath}/dist-server/main.bundle.js";
+                    options.BootModuleBuilder = env.IsDevelopment() ? new AngularCliBuilder(npmScript: "build:ssr") : null;
+                    options.ExcludeUrls = new[] { "/sockjs-node" };
+                });
+                 */
+
                 if (env.IsDevelopment())
                 {
                     spa.UseAngularCliServer(npmScript: "start");
