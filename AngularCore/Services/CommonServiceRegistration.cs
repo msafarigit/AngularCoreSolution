@@ -29,6 +29,7 @@ namespace AngularCore.Services
             string password = AesCryptography.Decrypt(appSettings.Password);
 
             string connectionString = string.Format(appSettings.OracleConnectionStringFormat, appSettings.DataSource, appSettings.UserName, password);
+            //ASP.Net Core Logger
             services.AddScoped<ILoggerService>(s => new LoggerService(s.GetService<AppSettings>(), connectionString));
             #endregion
 

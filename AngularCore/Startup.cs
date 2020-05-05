@@ -19,6 +19,7 @@ using Microsoft.Extensions.Options;
 using Microsoft.Net.Http.Headers;
 using Infrastructure;
 using AngularCore.Services;
+using Infrastructure.Logging;
 
 namespace AngularCore
 {
@@ -94,7 +95,7 @@ namespace AngularCore
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerService logger)
         {
             #region Set Date Format
             IOptions<RequestLocalizationOptions> options = app.ApplicationServices.GetService<IOptions<RequestLocalizationOptions>>();
@@ -118,6 +119,7 @@ namespace AngularCore
 
             if (env.IsDevelopment())
             {
+                logger.DatabaseLogger.Error("In Development environment");
                 app.UseDeveloperExceptionPage(); //Built-in middleware
             }
             else

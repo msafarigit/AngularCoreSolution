@@ -17,14 +17,11 @@ namespace Infrastructure.Logging
         {
             _appSettings = appSettings;
             _connectionString = connectionstring;
+
             LoggingConfiguration loggingConfiguration = new LoggingConfiguration();
-
             ConfigDatabaseTarget(loggingConfiguration);
-
             LogManager.Configuration = loggingConfiguration;
-
-            bool throwException = bool.Parse(_appSettings.LoggerThrowException);
-            LogManager.ThrowExceptions = throwException;
+            LogManager.ThrowExceptions = bool.Parse(_appSettings.LoggerThrowException);
 
             DatabaseLogger = LogManager.GetLogger(DatabaseTargetName);
             DatabaseLogger.Info("Start Database Logger.......................");
