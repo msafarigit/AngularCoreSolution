@@ -30,6 +30,7 @@ namespace AngularCore.Services
 
             string connectionString = string.Format(appSettings.OracleConnectionStringFormat, appSettings.DataSource, appSettings.UserName, password);
             //ASP.Net Core Logger
+            //another way: https://github.com/NLog/NLog/wiki/Getting-started-with-ASP.NET-Core-3
             services.AddScoped<ILoggerService>(s => new LoggerService(s.GetService<AppSettings>(), connectionString));
             #endregion
 

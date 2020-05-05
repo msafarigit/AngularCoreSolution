@@ -13,6 +13,7 @@ namespace Infrastructure.Logging
 
         public ILogger DatabaseLogger { get; }
 
+        //url: https://nlog-project.org/documentation/v2.0.1/html/T_NLog_Targets_DatabaseTarget.htm
         public LoggerService(IAppSetting appSettings, string connectionstring)
         {
             _appSettings = appSettings;
@@ -55,6 +56,7 @@ namespace Infrastructure.Logging
                                             "   :V_LOG_STACK_TRACE,\n" +
                                             "   TO_NUMBER(TO_CHAR(SYSDATE,'MM','NLS_CALENDAR = PERSIAN')))";
 
+            //url: https://github.com/nlog/NLog/wiki/Database-target
             databaseTarget.Parameters.Add(new DatabaseParameterInfo
             {
                 Name = ":V_MACHINE_NAME",
