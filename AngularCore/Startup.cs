@@ -20,6 +20,7 @@ using Microsoft.Net.Http.Headers;
 using Infrastructure;
 using AngularCore.Services;
 using Infrastructure.Logging;
+using AngularCore.Hubs;
 
 namespace AngularCore
 {
@@ -53,6 +54,16 @@ namespace AngularCore
 
             services.AddResponseCaching();
             services.AddResponseCompression();
+
+            services.AddSignalR();
+            //when call from http://localhost:4200/ as an individual web application!
+            //services.AddCors(options =>
+            //{
+            //    options.AddPolicy("CorsPolicy", builder => builder.WithOrigins("http://localhost:4200")
+            //                                                      .AllowAnyMethod()
+            //                                                      .AllowAnyHeader()
+            //                                                      .AllowCredentials());
+            //});
 
             //services.AddControllers() //only webapi
             //        .ConfigureApiBehaviorOptions(options =>
@@ -171,6 +182,8 @@ namespace AngularCore
 
             app.UseRouting();
 
+            //app.UseCors("CorsPolicy");
+
             /*url: https://docs.microsoft.com/en-us/aspnet/core/performance/response-compression?view=aspnetcore-3.1
              Use Response Compression Middleware when you're:
                 1-Unable to use the following server-based compression technologies:
@@ -187,14 +200,14 @@ namespace AngularCore
             app.UseResponseCaching();
             app.Use(async (context, next) =>
             {
-                //Cache-Control – Caches cacheable responses for up to 10 seconds.
+                //Cache-Control ï¿½ Caches cacheable responses for up to 10 seconds.
                 context.Response.GetTypedHeaders().CacheControl = new CacheControlHeaderValue()
                 {
                     NoCache = true, 
                     NoStore = true,
                     MaxAge = TimeSpan.FromSeconds(10)
                 };
-                //Vary – Configures the middleware to serve a cached response only if the Accept-Encoding header of subsequent requests matches that of the original request.
+                //Vary ï¿½ Configures the middleware to serve a cached response only if the Accept-Encoding header of subsequent requests matches that of the original request.
                 context.Response.Headers[HeaderNames.Vary] = new string[] { "Accept-Encoding" };
                 await next();
             });
@@ -221,6 +234,8 @@ namespace AngularCore
                 endpoints.MapControllerRoute("DefaultGetApi", "api/{controller}", new { action = "Get" }, new { httpMethod = new HttpMethodRouteConstraint(HttpMethod.Get.ToString()) });
                 endpoints.MapControllerRoute("DefaultPostApi", "api/{controller}", new { action = "Post" }, new { httpMethod = new HttpMethodRouteConstraint(HttpMethod.Post.ToString()) });
                 endpoints.MapControllerRoute("DefaultPutApi", "api/{controller}", new { action = "Put" }, new { httpMethod = new HttpMethodRouteConstraint(HttpMethod.Put.ToString()) });
+
+                endpoints.MapHub<ChartHub>("/chart");
             });
 
             /*
