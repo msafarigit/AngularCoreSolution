@@ -53,3 +53,19 @@ import { NavbarComponent } from './navbar/navbar.component';
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+/*
+url: https://www.typescriptlang.org/
+Starting with ECMAScript 2015, JavaScript has a concept of modules. TypeScript shares this concept.
+Modules are executed within their own scope, not in the global scope; this means that variables, functions, classes, etc.
+declared in a module are not visible outside the module unless they are explicitly exported using one of the export forms.
+Conversely, to consume a variable, function, class, interface, etc.
+exported from a different module, it has to be imported using one of the import forms.
+
+Module imports are resolved differently based on whether the module reference is relative or non-relative.
+A relative import is one that starts with /, ./ or ../. Some examples include:
+  import Entry from "./components/Entry";
+Any other import is considered non-relative. Some examples include:
+  import * as $ from "jquery";
+  import { Component } from "@angular/core";
+*/
