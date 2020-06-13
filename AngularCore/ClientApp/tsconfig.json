@@ -61,7 +61,7 @@
   in order to check any use of a, the compiler needs to know exactly what it represents, and will need to check its definition moduleA.
   There are two possible module resolution strategies: Node and Classic. You can use the --moduleResolution flag to specify the module resolution strategy.
   If not specified, the default is Classic for --module AMD | System | ES2015 or Node otherwise.
-   ► Classic 
+   ► Classic
     This used to be TypeScript’s default resolution strategy. Nowadays, this strategy is mainly present for backward compatibility.
     A relative import will be resolved relative to the importing file.
    ► Node
@@ -121,4 +121,9 @@
    When setting "baseUrl" to another value than ".", i.e. the directory of tsconfig.json,
    the mappings must be changed accordingly. Say, you set "baseUrl": "./src" in the above example,
    then jquery should be mapped to "../node_modules/jquery/dist/jquery".
+*/
+
+/*
+The "files" property takes a list of relative or absolute file paths.
+The "include" and "exclude" properties take a list of glob-like file patterns.
 */
