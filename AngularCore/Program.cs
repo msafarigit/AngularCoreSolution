@@ -49,7 +49,23 @@ namespace AngularCore
         public static IHostBuilder CreateHostBuilder(string[] args) => Host.CreateDefaultBuilder(args)
                                                                            .ConfigureAppConfiguration((hostingContext, config) =>
                                                                            {
+                                                                               //clears all the configuration providers
+                                                                               config.Sources.Clear();
+
+                                                                               //In the following code, settings in the appsettings-angular.json file:
+                                                                               // Override settings in the appsettings.json and appsettings.Environment.json files.
+                                                                               // Are overridden by settings in the Environment variables configuration provider 
+                                                                               // and the Command-line configuration provider.
+
+                                                                               IHostEnvironment env = hostingContext.HostingEnvironment;
+
+                                                                               config.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+                                                                                     .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true, reloadOnChange: true);
+
                                                                                config.AddJsonFile(@"./appsettings-angular.json", false, true);
+                                                                               config.AddEnvironmentVariables();
+                                                                               if (args != null)
+                                                                                   config.AddCommandLine(args);
                                                                            })
                                                                            .ConfigureWebHostDefaults(webBuilder =>
                                                                            {
