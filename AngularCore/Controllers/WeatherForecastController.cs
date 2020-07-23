@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
+using Microsoft.Extensions.Configuration;
 using Infrastructure.Logging;
 
 namespace AngularCore.Controllers
@@ -15,10 +17,16 @@ namespace AngularCore.Controllers
         };
 
         private readonly ILoggerService _loggerService;
+        private readonly AuthenticationOptions _authenticationOptions;
 
-        public WeatherForecastController(ILoggerService loggerService)
+        public WeatherForecastController(IConfiguration configuration, ILoggerService loggerService, IOptions<AuthenticationOptions> authenticationOptions)
         {
             _loggerService = loggerService;
+            _authenticationOptions = authenticationOptions.Value;
+
+            //Raw Configuration Value Binding
+            string x = configuration["Authentication:Username"];
+            string y = configuration["Authentication:BCS:Username"];
         }
 
         [HttpGet]

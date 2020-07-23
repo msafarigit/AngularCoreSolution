@@ -39,6 +39,9 @@ namespace AngularCore
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddHostedService<LifetimeEventsHostedService>();
+
+            services.Configure<AuthenticationOptions>(Configuration.GetSection(AuthenticationOptions.Authentication));
+
             // If using IIS:
             services.Configure<IISServerOptions>(options =>
             {
@@ -286,5 +289,35 @@ namespace AngularCore
             uriBuilder.Query = httpContext.Request.QueryString.ToString();
             return this.predicate(uriBuilder.Uri);
         }
+    }
+
+    /*
+     An options class:
+        - Must be non-abstract with a public parameterless constructor.
+        - All public read-write properties of the type are bound.
+        - Fields are not bound. In the preceding code, Password is not bound.
+          The Password property is used so the string "Password" doesn't need to be hard coded in the app
+          when binding the class to a configuration provider.
+
+    The good news is that the configuration engine is very flexible and provides a number of different ways to get at configuration objects.
+        - Raw Configuration[path:key]
+        - IOptions<T> binding to a Config Section
+        - Configuration.Bind() to bind to a Config Section
+        - Static Props if you want it
+    */
+    public class AuthenticationOptions
+    {
+        public const string Authentication = "Authentication";
+
+        public string Username { get; set; }
+        public string Password { get; set; }
+        public BCSSettings BCS { get; set; } = new BCSSettings();
+    }
+
+    public class BCSSettings
+    {
+        public string Url { get; set; }
+        public string Username { get; set; }
+        public string Password { get; set; }
     }
 }
