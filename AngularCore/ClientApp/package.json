@@ -54,7 +54,7 @@
     "ngx-webstorage": "^5.0.0",
     "node-sass": "^4.14.1",
     "oidc-client": "^1.10.1",
-    "rxjs": "~6.5.5",
+    "rxjs": "~6.6.2",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.3"
   },
