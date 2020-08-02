@@ -24,7 +24,6 @@
     "@angular/router": "~9.1.7",
     "@aspnet/signalr": "^1.1.4",
     "@ng-bootstrap/ng-bootstrap": "^6.1.0",
-    "@nguniversal/module-map-ngfactory-loader": "^8.2.6",
     "@progress/kendo-angular-buttons": "^5.4.2",
     "@progress/kendo-angular-common": "^1.2.2",
     "@progress/kendo-angular-dateinputs": "^4.3.0",
