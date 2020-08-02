@@ -8,7 +8,7 @@
   files, include and exclude from the inheriting config file overwrite those from the base config file.
 */
 {
-  "extends": "../tsconfig.json",
+  "extends": "../tsconfig.base.json",
   "compilerOptions": {
     "outDir": "../out-tsc/app",
     "types": [ "arcgis-js-api" ]

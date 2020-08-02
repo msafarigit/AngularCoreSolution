@@ -8,10 +8,10 @@
   files, include and exclude from the inheriting config file overwrite those from the base config file.
 */
 {
-  "extends": "../tsconfig.json",
+  "extends": "../tsconfig.base.json",
   "compilerOptions": {
-    "module": "commonjs"
-  },
+    "target": "es2016"
+},
   "angularCompilerOptions": {
     "entryModule": "app/app.server.module#AppServerModule"
   },

@@ -1,129 +1,20 @@
+/*
+  This is a "Solution Style" tsconfig.json file, and is used by editors and TypeScript’s language server to improve development experience.
+  It is not intended to be used to perform a compilation.
+
+  To learn more about this file see: https://angular.io/config/solution-tsconfig.
+*/
 {
-  "compileOnSave": false,
-  "compilerOptions": {
-    "baseUrl": "./src",
-    "module": "esnext",
-    "outDir": "./dist/out-tsc",
-    "sourceMap": true,
-    "declaration": false,
-    "importHelpers": true,
-    "moduleResolution": "node",
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "target": "es2015",
-    "typeRoots": [
-      "node_modules/@types"
-    ],
-    "lib": [
-      "es2018",
-      "dom"
-    ],
-    "paths": {
-      "@model/*": [ "app/model/*" ],
-      "@service/*": [ "app/service/*" ],
-      "@component/*": [ "app/component/*" ],
-      "@environments/*": [ "environments/*" ]
-    }
-  }
-}
-
-//url: https://www.typescriptlang.org/docs/
-/*
-  typeRoots: If typeRoots is specified, only packages under typeRoots will be included.
-
-  compileOnSave: Setting a top-level property compileOnSave signals to the IDE to generate all files for a given tsconfig.json upon saving.
-
-  lib: List of library files to be included in the compilation.
-   If lib is not specified a default list of libraries are injected. The default libraries injected are:
-   ► For target ES5: DOM,ES5,ScriptHost
-   ► For target ES6: DOM,ES6,DOM.Iterable,ScriptHost
-
-  module: Specify module code generation: "None", "CommonJS", "AMD", "System", "UMD", "ES6", "ES2015" or "ESNext".
-   ► Only "AMD" and "System" can be used in conjunction with --outFile.
-   ► "ES6" and "ES2015" values may be used when targeting "ES5" or lower.
-
-  target: Specify ECMAScript target version:
-   ► "ES3" (default)
-   ► "ES5"
-   ► "ES6"/"ES2015"
-   ► "ES2016"
-   ► "ES2017"
-   ► "ES2018"
-   ► "ES2019"
-   ► "ES2020"
-   ► "ESNext"
-  Note: "ESNext" targets latest supported ES proposed features.
-*/
-
-/*
-  moduleResolution: Module resolution is the process the compiler uses to figure out what an import refers to.
-  Consider an import statement like import { a } from "moduleA";
-  in order to check any use of a, the compiler needs to know exactly what it represents, and will need to check its definition moduleA.
-  There are two possible module resolution strategies: Node and Classic. You can use the --moduleResolution flag to specify the module resolution strategy.
-  If not specified, the default is Classic for --module AMD | System | ES2015 or Node otherwise.
-   ► Classic
-    This used to be TypeScript’s default resolution strategy. Nowadays, this strategy is mainly present for backward compatibility.
-    A relative import will be resolved relative to the importing file.
-   ► Node
-    This resolution strategy attempts to mimic the Node.js module resolution mechanism at runtime.
-    The full Node.js resolution algorithm is outlined in Node.js module documentation.
-
-  How Node.js resolves modules:
-   To understand what steps the TS compiler will follow, it is important to shed some light on Node.js modules.
-   Traditionally, imports in Node.js are performed by calling a function named require.
-   The behavior Node.js takes will differ depending on if require is given a relative path or a non-relative path.
-
-  How TypeScript resolves modules:
-   TypeScript will mimic the Node.js run-time resolution strategy in order to locate definition files for modules at compile-time.
-   To accomplish this, TypeScript overlays the TypeScript source file extensions (.ts, .tsx, and .d.ts) over Node’s resolution logic.
-   TypeScript will also use a field in package.json named "types" to mirror the purpose of "main" - the compiler will use it to find the “main” definition file to consult.
-
-   For example, an import statement like import { b } from "./moduleB" in /root/src/moduleA.ts would result in attempting the following locations for locating "./moduleB":
-    1. /root/src/moduleB.ts
-    2. /root/src/moduleB.tsx
-    3. /root/src/moduleB.d.ts
-    4. /root/src/moduleB/package.json (if it specifies a "types" property)
-    5. /root/src/moduleB/index.ts
-    6. /root/src/moduleB/index.tsx
-    7. /root/src/moduleB/index.d.ts
-
-  Additional module resolution flags:
-   The TypeScript compiler has a set of additional flags to inform the compiler of transformations that are expected
-   to happen to the sources to generate the final output.
-   It is important to note that the compiler will not perform any of these transformations;
-   it just uses these pieces of information to guide the process of resolving a module import to its definition file.
-
-   ► Base URL
-    Using a baseUrl is a common practice in applications using AMD module loaders where modules are “deployed” to a single folder at run-time.
-    The sources of these modules can live in different directories, but a build script will put them all together.
-    Setting baseUrl informs the compiler where to find modules.
-    All module imports with non-relative names are assumed to be relative to the baseUrl.
-    Note: that relative module imports are not impacted by setting the baseUrl, as they are always resolved relative to their importing files
-
-   ► Path mapping:
-    Sometimes modules are not directly located under baseUrl.
-    For instance, an import to a module "jquery" would be translated at runtime to "node_modules/jquery/dist/jquery.slim.min.js".
-    Loaders use a mapping configuration to map module names to files at run-time, see RequireJs documentation and SystemJS documentation.
-
-    The TypeScript compiler supports the declaration of such mappings using "paths" property in tsconfig.json files.
-    Here is an example for how to specify the "paths" property for jquery.
-
+  "files": [],
+  "references": [
     {
-      "compilerOptions": {
-        "baseUrl": ".", // This must be specified if "paths" is.
-        "paths": {
-          "jquery": ["node_modules/jquery/dist/jquery"] // This mapping is relative to "baseUrl"
-        }
-      }
+      "path": "./src/tsconfig.app.json"
+    },
+    {
+      "path": "./src/tsconfig.spec.json"
+    },
+    {
+      "path": "./src/tsconfig.server.json"
     }
-
-   Please notice that "paths" are resolved relative to "baseUrl".
-   When setting "baseUrl" to another value than ".", i.e. the directory of tsconfig.json,
-   the mappings must be changed accordingly. Say, you set "baseUrl": "./src" in the above example,
-   then jquery should be mapped to "../node_modules/jquery/dist/jquery".
-*/
-
-/*
-The "files" property takes a list of relative or absolute file paths.
-The "include" and "exclude" properties take a list of glob-like file patterns.
-*/
+  ]
+}
